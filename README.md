@@ -1,0 +1,174 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+# study.sankey
+
+## Settings
+
+``` r
+knitr::opts_chunk$set(
+  comment = "#>",
+  echo = TRUE,
+  error = TRUE,
+  fig.path = "man/figures/README-",
+  comment = "#>",
+  out.width = "100%",
+  fig.height = 8.3 * .66,
+  fig.width = 11.7 * .66,
+  dpi = 300
+)
+file_nm <- "inst/study.R"
+knitr::read_chunk(file_nm)
+message("R code chunks read from:\n", file_nm)
+```
+
+    ## R code chunks read from:
+    ## inst/study.R
+
+``` r
+devtools::check(quiet = TRUE)
+```
+
+    #> ℹ Loading study.sankey
+
+    #> Loading required package: grid
+
+    #> ── R CMD check results ──────────────────────────── study.sankey 0.0.0.9000 ────
+    #> Duration: 2m 5s
+    #> 
+    #> > checking for unstated dependencies in examples ... OK
+    #>    WARNING
+    #>   ‘qpdf’ is needed for checks on size reduction of PDFs
+    #> 
+    #> 0 errors ✓ | 1 warning x | 0 notes ✓
+
+    #> Error: R CMD check found WARNINGs
+
+``` r
+devtools::load_all()
+```
+
+    #> ℹ Loading study.sankey
+
+``` r
+library(ggalluvial)
+```
+
+    #> Loading required package: ggplot2
+
+``` r
+library(dplyr)
+```
+
+    #> 
+    #> Attaching package: 'dplyr'
+
+    #> The following objects are masked from 'package:stats':
+    #> 
+    #>     filter, lag
+
+    #> The following objects are masked from 'package:base':
+    #> 
+    #>     intersect, setdiff, setequal, union
+
+``` r
+library(magrittr)
+```
+
+## Dataset preparation
+
+``` r
+test_dta <- adam_ww(50)
+attach(test_dta, warn.conflicts = FALSE)
+
+adsl %>%
+  head() %>%
+  knitr::kable(caption = "Dummy ADSL dataset")
+```
+
+|     | USUBJID     | TRT                      |  BASELINE| ARMCD |
+|:----|:------------|:-------------------------|---------:|:------|
+| 37  | SUBJECT 037 | ACTIVE TREATMENT DOSE 01 |      27.8| ARM B |
+| 39  | SUBJECT 039 | ACTIVE TREATMENT DOSE 01 |      25.0| ARM B |
+| 40  | SUBJECT 040 | ACTIVE TREATMENT DOSE 01 |      20.7| ARM B |
+| 105 | SUBJECT 105 | ACTIVE TREATMENT DOSE 01 |      22.8| ARM B |
+| 111 | SUBJECT 111 | ACTIVE TREATMENT DOSE 01 |      16.9| ARM B |
+| 121 | SUBJECT 121 | ACTIVE TREATMENT DOSE 01 |      21.2| ARM B |
+
+``` r
+adpasi %>%
+  head() %>%
+  knitr::kable(caption = "Dummy ADPASI dataset")
+```
+
+| USUBJID     | AVISIT |  AVAL| PARAMCD |
+|:------------|:-------|-----:|:--------|
+| SUBJECT 037 | WEEK00 |  27.8| PASITOT |
+| SUBJECT 039 | WEEK00 |  25.0| PASITOT |
+| SUBJECT 040 | WEEK00 |  20.7| PASITOT |
+| SUBJECT 105 | WEEK00 |  22.8| PASITOT |
+| SUBJECT 111 | WEEK00 |  16.9| PASITOT |
+| SUBJECT 121 | WEEK00 |  21.2| PASITOT |
+
+``` r
+ads <- adpasi %>%
+  filter(AVISIT %in% c("WEEK00", "WEEK01", "WEEK08", "WEEK52")) %>%
+  mutate(
+    time = factor(AVISIT),
+    rsp = cut(AVAL, breaks = 3, labels = c("Low", "Mid", "High")),
+    rsp = add_missing(rsp),
+    subj = gsub("^SUBJECT (.*)$", x = USUBJID, replacement = "\\1")
+  ) %>%
+  select(subj, time, rsp) %>%
+  arrange(rsp, time, subj)
+
+ads %>%
+  head() %>%
+  knitr::kable(caption = 'Outlook of the analysis dataset data') # lintr demo
+```
+
+| subj | time   | rsp |
+|:-----|:-------|:----|
+| 187  | WEEK00 | Low |
+| 040  | WEEK01 | Low |
+| 111  | WEEK01 | Low |
+| 248  | WEEK01 | Low |
+| 299  | WEEK01 | Low |
+| 307  | WEEK01 | Low |
+
+## Graphics
+
+``` r
+# test <- viridis::viridis(5) # lintr demonstration
+color_scale <- colorScale <-  viridis::viridis(# lintr demonstration
+  nlevels(ads$rsp),
+  begin = .2, end = .8, option = "C",
+  direction = -1
+)
+names(color_scale) <- levels(ads$rsp)
+
+gg_sankey <- ads %>%
+  ggplot(aes(x = time, stratum = rsp, alluvium = subj, fill = rsp)) +
+  geom_stratum(colour = NA) +
+  geom_flow(
+    stat = "alluvium",
+    color = "gray85",
+    lwd = .01
+  ) +
+  ggtitle("Alluvial plot: Response category by visit") +
+  scale_fill_manual(values = color_scale) +
+  theme_diane()
+```
+
+``` r
+gg_sankey <- clean_slate(margin = unit(c(1, 1, 1, 1), "cm")) %>%
+  add_header("Topic", c("Not Yet Confidential", "Draft")) %>%
+  add_title(c(
+    "Figure 1 - Prototype of Alluvial plot",
+    "Analysis set: 50 random subjects"
+  )) %>%
+  add_figure(gg_sankey, width = unit(5, "in"), height = unit(2, "in")) %>%
+  add_footer("Program: prototype study.sankey", "Page 1 of 1") %T>%
+  grid.draw()
+```
+
+<img src="man/figures/README-annotation-1.png" width="100%" />

@@ -1,0 +1,30 @@
+Package: study.sankey
+Title: Analysis as a package: Sankey Diagram for a Study
+Version: 0.0.0.9000
+Authors@R: person("Francois",
+           "Collin",
+           email = "francois.collin@ucb.com",
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-0524-5755"))
+Description: Self-contained analysis to compute Sankey Diagram for a 
+  DIAnE request.
+Depends: R (>= 3.4.0),
+  grid
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr
+RoxygenNote: 7.1.2
+Imports: 
+    tidyr,
+    assertthat,
+    ggplot2,
+    testthat,
+    magrittr,
+    methods,
+    viridis,
+    dplyr,
+    ggalluvial
