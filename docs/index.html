@@ -72,13 +72,13 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="study-sankey" class="section level1">
+<div id="studysankey" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#study-sankey" class="anchor"></a>study.sankey</h1></div>
+<a href="#studysankey" class="anchor"></a>study.sankey</h1></div>
 <div id="settings" class="section level2">
 <h2 class="hasAnchor">
 <a href="#settings" class="anchor"></a>Settings</h2>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>
   comment <span class="op">=</span> <span class="st">"#&gt;"</span>,
   echo <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -93,49 +93,49 @@
 <span class="va">file_nm</span> <span class="op">&lt;-</span> <span class="st">"inst/study.R"</span>
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/read_chunk.html">read_chunk</a></span><span class="op">(</span><span class="va">file_nm</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/message.html">message</a></span><span class="op">(</span><span class="st">"R code chunks read from:\n"</span>, <span class="va">file_nm</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">## R code chunks read from:
-## inst/study.R</code></pre></div>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## R code chunks read from:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## inst/study.R</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/check.html">check</a></span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="co">#&gt; ℹ Loading study.sankey</span>
-
-<span class="co">#&gt; Loading required package: grid</span>
-
-<span class="co">#&gt; ── R CMD check results ──────────────────────────── study.sankey 0.0.0.9000 ────</span>
-<span class="co">#&gt; Duration: 2m 5s</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; &gt; checking for unstated dependencies in examples ... OK</span>
-<span class="co">#&gt;    </span><span class="al">WARNING</span>
-<span class="co">#&gt;   ‘qpdf’ is needed for checks on size reduction of PDFs</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 0 errors ✓ | 1 warning x | 0 notes ✓</span>
-
-<span class="co">#&gt; Error: R CMD check found WARNINGs</span></code></pre></div>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Installed roxygen2 version (7.1.1) doesn't match required version (7.1.2)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; x check() will not re-document this package</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ── R CMD check results ──────────────────────────── study.sankey 0.0.0.9000 ────</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Duration: 47.5s</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0 errors ✓ | 0 warnings ✓ | 0 notes ✓</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/load_all.html">load_all</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="co">#&gt; ℹ Loading study.sankey</span></code></pre></div>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Loading study.sankey</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: grid</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://corybrunson.github.io/ggalluvial/">ggalluvial</a></span><span class="op">)</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="co">#&gt; Loading required package: ggplot2</span></code></pre></div>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: ggplot2</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span></code></pre></div>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     filter, lag</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="dataset-preparation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dataset-preparation" class="anchor"></a>Dataset preparation</h2>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test_dta</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/adam_ww.html">adam_ww</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">test_dta</span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
@@ -195,7 +195,8 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<p>Dummy ADSL dataset</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">adpasi</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Dummy ADPASI dataset"</span><span class="op">)</span></code></pre></div>
@@ -245,7 +246,8 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<p>Dummy ADPASI dataset</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ads</span> <span class="op">&lt;-</span> <span class="va">adpasi</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">AVISIT</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WEEK00"</span>, <span class="st">"WEEK01"</span>, <span class="st">"WEEK08"</span>, <span class="st">"WEEK52"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
@@ -299,13 +301,14 @@
 </tr>
 </tbody>
 </table>
+<p>Outlook of the analysis dataset data</p>
 </div>
 <div id="graphics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#graphics" class="anchor"></a>Graphics</h2>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># test &lt;- viridis::viridis(5) # lintr demonstration</span>
-<span class="va">color_scale</span> <span class="op">&lt;-</span> <span class="va">colorScale</span> <span class="op">&lt;-</span>  <span class="fu">viridis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/viridisLite/man/viridis.html">viridis</a></span><span class="op">(</span><span class="co"># lintr demonstration</span>
+<span class="va">color_scale</span> <span class="op">&lt;-</span> <span class="va">colorScale</span> <span class="op">&lt;-</span>  <span class="fu">viridis</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html">viridis</a></span><span class="op">(</span><span class="co"># lintr demonstration</span>
   <span class="fu"><a href="https://rdrr.io/r/base/nlevels.html">nlevels</a></span><span class="op">(</span><span class="va">ads</span><span class="op">$</span><span class="va">rsp</span><span class="op">)</span>,
   begin <span class="op">=</span> <span class="fl">.2</span>, end <span class="op">=</span> <span class="fl">.8</span>, option <span class="op">=</span> <span class="st">"C"</span>,
   direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>
@@ -314,8 +317,8 @@
 
 <span class="va">gg_sankey</span> <span class="op">&lt;-</span> <span class="va">ads</span> <span class="op">%&gt;%</span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, stratum <span class="op">=</span> <span class="va">rsp</span>, alluvium <span class="op">=</span> <span class="va">subj</span>, fill <span class="op">=</span> <span class="va">rsp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/ggalluvial/man/geom_stratum.html">geom_stratum</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/ggalluvial/man/geom_flow.html">geom_flow</a></span><span class="op">(</span>
+  <span class="fu"><a href="http://corybrunson.github.io/ggalluvial/reference/geom_stratum.html">geom_stratum</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="http://corybrunson.github.io/ggalluvial/reference/geom_flow.html">geom_flow</a></span><span class="op">(</span>
     stat <span class="op">=</span> <span class="st">"alluvium"</span>,
     color <span class="op">=</span> <span class="st">"gray85"</span>,
     lwd <span class="op">=</span> <span class="fl">.01</span>
@@ -323,7 +326,7 @@
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Alluvial plot: Response category by visit"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">scale_fill_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="va">color_scale</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="reference/theme_diane.html">theme_diane</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gg_sankey</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/slate.html">clean_slate</a></span><span class="op">(</span>margin <span class="op">=</span> <span class="fu">unit</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/slate.html">add_header</a></span><span class="op">(</span><span class="st">"Topic"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Not Yet Confidential"</span>, <span class="st">"Draft"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/slate.html">add_title</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>

@@ -69,7 +69,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="analysis-as-a-package_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Analysis as a package</h1>
@@ -94,10 +94,10 @@
 <p>In a <code>script.R</code>:</p>
 <ul>
 <li>prepare a dummy set of data following the Analysis Data Model (ADaM, <a href="https://www.cdisc.org/standards/foundational/adam">CDISC</a>).</li>
-<li>pre process the data (e.g. filter, transformations).</li>
+<li>pre process the data (e.g. filter, transformations).</li>
 <li>obtain the graph.</li>
 </ul>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Dummy collection of ADaM datasets: ADSL and ADPASI</span>
 <span class="va">raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span>
@@ -211,7 +211,7 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># Generate the graphic</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://corybrunson.github.io/ggalluvial/">ggalluvial</a></span><span class="op">)</span>
@@ -219,11 +219,11 @@
 
 <span class="va">ads</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, stratum <span class="op">=</span> <span class="va">rsp</span>, alluvium <span class="op">=</span> <span class="va">subj</span>, fill <span class="op">=</span> <span class="va">rsp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/ggalluvial/man/geom_stratum.html">geom_stratum</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/ggalluvial/man/geom_flow.html">geom_flow</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"alluvium"</span>, color <span class="op">=</span> <span class="st">"gray85"</span>, lwd <span class="op">=</span> <span class="fl">.01</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="http://corybrunson.github.io/ggalluvial/reference/geom_stratum.html">geom_stratum</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="http://corybrunson.github.io/ggalluvial/reference/geom_flow.html">geom_flow</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"alluvium"</span>, color <span class="op">=</span> <span class="st">"gray85"</span>, lwd <span class="op">=</span> <span class="fl">.01</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>
     values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span>
-      <span class="fu">viridis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/viridisLite/man/viridis.html">viridis</a></span><span class="op">(</span><span class="fl">4</span>, begin <span class="op">=</span> <span class="fl">.2</span>, end <span class="op">=</span> <span class="fl">.8</span>, option <span class="op">=</span> <span class="st">"C"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>,
+      <span class="fu">viridis</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html">viridis</a></span><span class="op">(</span><span class="fl">4</span>, begin <span class="op">=</span> <span class="fl">.2</span>, end <span class="op">=</span> <span class="fl">.8</span>, option <span class="op">=</span> <span class="st">"C"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>,
       nm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">ads</span><span class="op">$</span><span class="va">rsp</span><span class="op">)</span>
     <span class="op">)</span>
   <span class="op">)</span></code></pre></div>
@@ -232,22 +232,25 @@
 <ul>
 <li>rely on a new function (<code><a href="../reference/add_missing.html">add_missing()</a></code>).
 <ul>
-<li><em>"I will probably need that in the future for another request"</em></li>
+<li><em>“I will probably need that in the future for another request”</em></li>
 </ul>
 </li>
 <li>nice to have: decide the number of subjects for the examples, could be a new function, to generate dummy data on demand.
 <ul>
-<li><em>"That so convenient to have ready to work dummy datasets!"</em></li>
+<li><em>“That so convenient to have ready to work dummy datasets!”</em></li>
 </ul>
 </li>
 <li>needs functions define in other projects:
 <ul>
 <li>
-<em>"Oh! I remember, I already coded this functionalities for a previous analysis!"</em>:</li>
+<em>“Oh! I remember, I already coded this functionalities for a previous analysis!”</em>:
+<ul>
 <li>
 <code><a href="../reference/slate.html">clean_slate()</a></code>: figure annotations (header, title, notes and footer).</li>
 <li>
 <code><a href="../reference/preview.html">preview()</a></code>: preview the generated pdf itself.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -263,23 +266,23 @@
 <a href="#create-a-r-project-package" class="anchor"></a>Create a R project package</h3>
 <p>Either use <code><a href="https://devtools.r-lib.org//reference/create.html">devtools::create()</a></code>, or follow the RStudio user interface in 5 clicks:</p>
 <div class="figure">
-<img src="img/rig_01.png" alt="Click 1 - Create a new project" style="width:50.0%"><p class="caption">Click 1 - Create a new project</p>
+<img src="img/rig_01.png" style="width:50.0%" alt=""><p class="caption">Click 1 - Create a new project</p>
 </div>
 <hr>
 <div class="figure">
-<img src="img/rig_02.png" alt="Click 2 - in a new directory" style="width:50.0%"><p class="caption">Click 2 - in a new directory</p>
+<img src="img/rig_02.png" style="width:50.0%" alt=""><p class="caption">Click 2 - in a new directory</p>
 </div>
 <hr>
 <div class="figure">
-<img src="img/rig_03.png" alt="Click 3 - R Package using devtools" style="width:50.0%"><p class="caption">Click 3 - R Package using devtools</p>
+<img src="img/rig_03.png" style="width:50.0%" alt=""><p class="caption">Click 3 - R Package using devtools</p>
 </div>
 <hr>
 <div class="figure">
-<img src="img/rig_04.png" alt="Click 4 - Create project" style="width:50.0%"><p class="caption">Click 4 - Create project</p>
+<img src="img/rig_04.png" style="width:50.0%" alt=""><p class="caption">Click 4 - Create project</p>
 </div>
 <hr>
 <div class="figure">
-<img src="img/rig_05.png" alt="Click 5: already setup" style="width:50.0%"><p class="caption"><del>Click 5</del>: already setup</p>
+<img src="img/rig_05.png" style="width:50.0%" alt=""><p class="caption"><del>Click 5</del>: already setup</p>
 </div>
 <hr>
 <ol start="2" style="list-style-type: decimal">
@@ -289,7 +292,7 @@
 </ul>
 </li>
 </ol>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## ---- settings ----</span>
 
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/load_all.html">load_all</a></span><span class="op">(</span><span class="op">)</span>
@@ -312,7 +315,7 @@
 </li>
 </ol>
 <p>The markup system <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html">roxygen2</a>, helps making a complete documentation. Example with the function <code><a href="../reference/add_missing.html">add_missing()</a></code> in <code>R/add_missing.R</code>.</p>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' Factor: NA is "Missing" level</span>
 <span class="co">#'</span>
 <span class="co">#' Assign the value "Missing" to missing values of a factor. Build as [addNA()].</span>
@@ -358,21 +361,21 @@
 <li><f2>: Go to function definition.</f2></li>
 </ul>
 </li>
-<li>"<em>Many files, should every file be sourced with <code><a href="https://rdrr.io/r/base/source.html">source()</a></code></em>":
+<li>“<em>Many files, should every file be sourced with <code><a href="https://rdrr.io/r/base/source.html">source()</a></code></em>”:
 <ul>
 <li>
 <code><a href="https://devtools.r-lib.org//reference/load_all.html">devtools::load_all()</a></code>: load all the package, all the function becomes available similarly to a <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> call for an installed package.</li>
 </ul>
 </li>
-<li>"<em>Many files, how a programmer/reviewer knows where to start?</em>"
+<li>“<em>Many files, how a programmer/reviewer knows where to start?</em>”
 <ul>
 <li>
 <code><a href="https://usethis.r-lib.org/reference/use_readme_rmd.html">usethis::use_readme_rmd()</a></code>, use <code><a href="https://rdrr.io/pkg/knitr/man/read_chunk.html">knitr::read_chunk(inst/study.R)</a></code> to screen the script sections, and use empty named r code chunk to decide which section to execute in which order.</li>
 <li>Good because:
 <ul>
-<li>there are sections needed for development only, but not for the program run (e.g. preview) while code-commenting is bad practice.</li>
+<li>there are sections needed for development only, but not for the program run (e.g. preview) while code-commenting is bad practice.</li>
 <li>run the program is simple as clicking on the knit button.</li>
-<li>room for contextual information (e.g. a decision made because of an unexpected finding).</li>
+<li>room for contextual information (e.g. a decision made because of an unexpected finding).</li>
 </ul>
 </li>
 </ul>
@@ -391,12 +394,12 @@
 <li>
 <code>&lt;ctrl&gt;+&lt;shift&gt;+&lt;d&gt;</code>, equivalent to <code><a href="https://devtools.r-lib.org//reference/document.html">devtools::document()</a></code> updates the function documentation (populates the <code>NAMESPACE</code> file and <code>man/</code> folder).</li>
 <li>
-<code>&lt;ctrl&gt;+&lt;shift&gt;+&lt;e&gt;</code>, equivalent to <code><a href="https://devtools.r-lib.org//reference/check.html">devtools::check()</a></code> very a large number of standards (e.g. functions are well documented, dependencies are well accounted for, examples are working).</li>
+<code>&lt;ctrl&gt;+&lt;shift&gt;+&lt;e&gt;</code>, equivalent to <code><a href="https://devtools.r-lib.org//reference/check.html">devtools::check()</a></code> very a large number of standards (e.g. functions are well documented, dependencies are well accounted for, examples are working).</li>
 </ul>
 </li>
 </ul>
 <div class="figure">
-<img src="img/rig_06.png" alt="Devtools: look at the build panel" style="width:50.0%"><p class="caption">Devtools: look at the build panel</p>
+<img src="img/rig_06.png" style="width:50.0%" alt=""><p class="caption">Devtools: look at the build panel</p>
 </div>
 <ul>
 <li>
@@ -407,7 +410,7 @@
 </li>
 </ul>
 <div class="figure">
-<img src="img/rig_07.png" alt="Lintr: keep-up with code quality" style="width:50.0%"><p class="caption">Lintr: keep-up with code quality</p>
+<img src="img/rig_07.png" style="width:50.0%" alt=""><p class="caption">Lintr: keep-up with code quality</p>
 </div>
 <ul>
 <li>
@@ -424,9 +427,9 @@
 <strong>data</strong>: contains datasets, possibly along with the preprocessing code.</li>
 <li>templates: complexe templates ins <code>inst/rmarkdown</code>.</li>
 <li>
-<code>vignettes/</code>: a place to explain a framework (e.g. the present document).</li>
+<code>vignettes/</code>: a place to explain a framework (e.g. the present document).</li>
 <li>
-<code>tests/</code>: place for automated test (e.g. test that the ADSL data returned by <code>adam_ww</code> is such as <code>USUBJID</code> is the unique row identifier).</li>
+<code>tests/</code>: place for automated test (e.g. test that the ADSL data returned by <code>adam_ww</code> is such as <code>USUBJID</code> is the unique row identifier).</li>
 <li>Git integration.</li>
 </ul>
 </div>

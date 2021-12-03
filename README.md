@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # study.sankey
 
 ## Settings
@@ -28,26 +29,26 @@ message("R code chunks read from:\n", file_nm)
 devtools::check(quiet = TRUE)
 ```
 
-    #> ℹ Loading study.sankey
+    #> ────────────────────────────────────────────────────────────────────────────────
 
-    #> Loading required package: grid
+    #> ℹ Installed roxygen2 version (7.1.1) doesn't match required version (7.1.2)
+
+    #> x check() will not re-document this package
+
+    #> ────────────────────────────────────────────────────────────────────────────────
 
     #> ── R CMD check results ──────────────────────────── study.sankey 0.0.0.9000 ────
-    #> Duration: 2m 5s
+    #> Duration: 47.5s
     #> 
-    #> > checking for unstated dependencies in examples ... OK
-    #>    WARNING
-    #>   ‘qpdf’ is needed for checks on size reduction of PDFs
-    #> 
-    #> 0 errors ✓ | 1 warning x | 0 notes ✓
-
-    #> Error: R CMD check found WARNINGs
+    #> 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
 
 ``` r
 devtools::load_all()
 ```
 
     #> ℹ Loading study.sankey
+
+    #> Loading required package: grid
 
 ``` r
 library(ggalluvial)
@@ -85,14 +86,16 @@ adsl %>%
   knitr::kable(caption = "Dummy ADSL dataset")
 ```
 
-|     | USUBJID     | TRT                      |  BASELINE| ARMCD |
+|     | USUBJID     | TRT                      | BASELINE | ARMCD |
 |:----|:------------|:-------------------------|---------:|:------|
-| 37  | SUBJECT 037 | ACTIVE TREATMENT DOSE 01 |      27.8| ARM B |
-| 39  | SUBJECT 039 | ACTIVE TREATMENT DOSE 01 |      25.0| ARM B |
-| 40  | SUBJECT 040 | ACTIVE TREATMENT DOSE 01 |      20.7| ARM B |
-| 105 | SUBJECT 105 | ACTIVE TREATMENT DOSE 01 |      22.8| ARM B |
-| 111 | SUBJECT 111 | ACTIVE TREATMENT DOSE 01 |      16.9| ARM B |
-| 121 | SUBJECT 121 | ACTIVE TREATMENT DOSE 01 |      21.2| ARM B |
+| 37  | SUBJECT 037 | ACTIVE TREATMENT DOSE 01 |     27.8 | ARM B |
+| 39  | SUBJECT 039 | ACTIVE TREATMENT DOSE 01 |     25.0 | ARM B |
+| 40  | SUBJECT 040 | ACTIVE TREATMENT DOSE 01 |     20.7 | ARM B |
+| 105 | SUBJECT 105 | ACTIVE TREATMENT DOSE 01 |     22.8 | ARM B |
+| 111 | SUBJECT 111 | ACTIVE TREATMENT DOSE 01 |     16.9 | ARM B |
+| 121 | SUBJECT 121 | ACTIVE TREATMENT DOSE 01 |     21.2 | ARM B |
+
+Dummy ADSL dataset
 
 ``` r
 adpasi %>%
@@ -100,14 +103,16 @@ adpasi %>%
   knitr::kable(caption = "Dummy ADPASI dataset")
 ```
 
-| USUBJID     | AVISIT |  AVAL| PARAMCD |
+| USUBJID     | AVISIT | AVAL | PARAMCD |
 |:------------|:-------|-----:|:--------|
-| SUBJECT 037 | WEEK00 |  27.8| PASITOT |
-| SUBJECT 039 | WEEK00 |  25.0| PASITOT |
-| SUBJECT 040 | WEEK00 |  20.7| PASITOT |
-| SUBJECT 105 | WEEK00 |  22.8| PASITOT |
-| SUBJECT 111 | WEEK00 |  16.9| PASITOT |
-| SUBJECT 121 | WEEK00 |  21.2| PASITOT |
+| SUBJECT 037 | WEEK00 | 27.8 | PASITOT |
+| SUBJECT 039 | WEEK00 | 25.0 | PASITOT |
+| SUBJECT 040 | WEEK00 | 20.7 | PASITOT |
+| SUBJECT 105 | WEEK00 | 22.8 | PASITOT |
+| SUBJECT 111 | WEEK00 | 16.9 | PASITOT |
+| SUBJECT 121 | WEEK00 | 21.2 | PASITOT |
+
+Dummy ADPASI dataset
 
 ``` r
 ads <- adpasi %>%
@@ -134,6 +139,8 @@ ads %>%
 | 248  | WEEK01 | Low |
 | 299  | WEEK01 | Low |
 | 307  | WEEK01 | Low |
+
+Outlook of the analysis dataset data
 
 ## Graphics
 

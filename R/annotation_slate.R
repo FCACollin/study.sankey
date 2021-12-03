@@ -190,7 +190,7 @@ add_figure <- function(page,
 #'
 add_in_split_row <- function(page, row, left, right, guide = FALSE) {
   nlines <- max(1, length(left), length(right))
-  page$vp$layout$heights[[row]] <- nlines
+  page$vp$layout$heights[[row]] <- grid::unit(nlines, "lines")
   vp <- list(
     left = grid::viewport(
       name = "lhs", layout.pos.row = row, layout.pos.col = 1
@@ -240,7 +240,7 @@ add_footer <- function(page, left, right, ...) {
 #' @export
 #'
 add_title <- function(page, text, guide = FALSE) {
-  page$vp$layout$heights[[2]] <- length(text)
+  page$vp$layout$heights[[2]] <- grid::unit(length(text), "lines")
   vp <- grid::viewport(name = "tle", layout.pos.row = 2)
   if (guide) page <- grid::addGrob(page, child = grid::rectGrob(vp = vp))
   grid::addGrob(
@@ -264,7 +264,10 @@ add_note <- function(page, text,
   text <- sapply(text, strwrap, width = str_width)
   text <- unname(text)
   text <- unlist(text)
-  page$vp$layout$heights[[4]] <- length(text) + sum(skipped_lines)
+  page$vp$layout$heights[[4]] <- grid::unit(
+    length(text) + sum(skipped_lines),
+    "lines"
+  )
   vp <- grid::viewport(name = "note", layout.pos.row = 4)
   if (guide) page <- grid::addGrob(page, child = grid::rectGrob(vp = vp))
   grid::addGrob(
