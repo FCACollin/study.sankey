@@ -1,6 +1,6 @@
 #' Factor: NA is "Missing" level
 #'
-#' Assign the value "Missing" to missing values of a factor. Build as [addNA()].
+#' Assign the value "Missing" to missing values of a factor. Built as [addNA()].
 #'
 #' @param x (`factor`)
 #' @param missing_lvl (`character`)

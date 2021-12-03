@@ -12,7 +12,7 @@ add_missing(x, missing_lvl = "Missing")
 \item{missing_lvl}{(`character`)}
 }
 \description{
-Assign the value "Missing" to missing values of a factor. Build as [addNA()].
+Assign the value "Missing" to missing values of a factor. Built as [addNA()].
 }
 \examples{
 

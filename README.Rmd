@@ -10,7 +10,14 @@ params:
 
 # study.sankey
 
-## Settings
+Available at:
+
+- Site: <https://fcacollin.github.io/study.sankey>
+- Source: <https://github.com/FCACollin/study.sankey>
+
+```bash
+git clone https://github.com/FCACollin/study.sankey.git
+```
 
 ```{r setup}
 knitr::opts_chunk$set(
@@ -24,19 +31,50 @@ knitr::opts_chunk$set(
   fig.width = 11.7 * .66,
   dpi = 300
 )
-file_nm <- "inst/study.R"
-knitr::read_chunk(file_nm)
-message("R code chunks read from:\n", file_nm)
 ```
+# 1. Controlled execution
+
+As any R Markdown file, the `params` argument in the YAML front matter offers
+controlled-execution settings. For instance:
+
+- when the following parameter is used:
+
+```yaml
+params:
+  diag: true
+```
+  
+- this code chunk is evaluated and included:
+
+````
+```{r, check, eval=params$diag, include=params$diag}`r ''`
+devtools::check(quiet = TRUE)
+```
+````
+
+- note: `devtools::check()` provides diagnostic/quality information
+  about the package but is lengthy, hence the rendering time is substantially
+  increased for `diag: true`.
 
 ```{r, check, eval=params$diag, include=params$diag}
 devtools::check(quiet = TRUE)
 ```
 
+The code chunks in `inst/study.R` are identified by `knitr::read_chunk()`;
+then can then selectively called from the `README.Rmd` file.
+
+```{r readchunks}
+file_nm <- "inst/study.R"
+knitr::read_chunk(file_nm)
+message("R code chunks read from:\n", file_nm)
+```
+
+## 2. Analysis
+
 ```{r, settings}
 ```
 
-## Dataset preparation
+### 2.1. Dataset preparation
 
 ```{r, data_adam}
 ```
@@ -44,11 +82,10 @@ devtools::check(quiet = TRUE)
 ```{r, analysis_dataset}
 ```
 
-## Graphics
+### 2.2. Graphics
 
 ```{r, graphic}
 ```
 
 ```{r, annotation}
 ```
-

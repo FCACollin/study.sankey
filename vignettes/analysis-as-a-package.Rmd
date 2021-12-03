@@ -38,6 +38,7 @@ In a `script.R`:
 
 ```{r}
 # Dummy collection of ADaM datasets: ADSL and ADPASI
+
 raw <- read.table(
   file.path(
     "https://raw.githubusercontent.com/VIS-SIG/Wonderful-Wednesdays",
@@ -75,6 +76,9 @@ adpasi <- raw %>%
   ) %>%
   select(USUBJID, PARAMCD, AVISIT, AVAL)
 
+
+# Analysis dataset preprocessing
+
 # function: replace missing levels of a factor by "Missing"
 add_missing <- function(x) {
   ll <- levels(x)
@@ -84,8 +88,6 @@ add_missing <- function(x) {
   factor(x, levels = ll, exclude = NULL)
 }
 
-
-# Analysis dataset preprocessing
 set.seed(3)
 ads <- adpasi %>%
   filter(AVISIT %in% c("WEEK00", "WEEK01", "WEEK08", "WEEK52")) %>%
@@ -99,23 +101,18 @@ ads <- adpasi %>%
   filter(subj %in% sample(unique(subj), 200)) %>%
   arrange(rsp, time, subj)
 
-ads %>%
-  head() %>%
-  knitr::kable(caption = "Outlook of the data")
 
 # Generate the graphic
 library(ggalluvial)
 
-ads %>%
-  ggplot(aes(x = time, stratum = rsp, alluvium = subj, fill = rsp)) +
+color_scale <- setNames(
+  viridis::viridis(4, begin = .2, end = .8, option = "C", direction = -1),
+  nm = levels(ads$rsp)
+)
+ggplot(ads, aes(x = time, stratum = rsp, alluvium = subj, fill = rsp)) +
   geom_stratum(colour = NA) +
   geom_flow(stat = "alluvium", color = "gray85", lwd = .01) +
-  scale_fill_manual(
-    values = setNames(
-      viridis::viridis(4, begin = .2, end = .8, option = "C", direction = -1),
-      nm = levels(ads$rsp)
-    )
-  )
+  scale_fill_manual(values = color_scale)
 ```
 
 
@@ -126,9 +123,8 @@ Result, it is working and:
 - nice to have: decide the number of subjects for the examples, could be
   a new function, to generate dummy data on demand.
     + _"That so convenient to have ready to work dummy datasets!"_
-- needs functions define in other projects:
-    + _"Oh! I remember, I already coded this functionalities for a previous 
-    analysis!"_:
+- needs functions which are defined in other projects:
+    + _"Oh! I remember, I already coded this for a previous analysis!"_:
       + `clean_slate()`: figure annotations (header, title, notes and footer).
       + `preview()`: preview the generated pdf itself.
 
@@ -163,10 +159,10 @@ Either use `devtools::create()`, or follow the RStudio user interface in
 ---
 
 
-2. Move the script in `inst/`, a rather permissive area of the package.
-    + makes sections ot enable show/hide document outline in RStudio interface,
-    and make section _knit-able_.
-    e.g.
+2. Move the script in `inst/`, a permissive area of the package.
+    + makes sections to enable _show/hide document outline_ in RStudio
+    interface, and make section _knit-able_ for controlled execution;
+    for instance:
 
 ```r    
 ## ---- settings ----
@@ -176,6 +172,8 @@ library(ggalluvial)
 library(dplyr)
 library(magrittr)
 ```
+
+---
 
 3. The folder `R/` contains the documented functions:
     + a new function to create a dummy dataset from Wonderful Wednesday PASI
@@ -193,7 +191,7 @@ Example with the function `add_missing()` in `R/add_missing.R`.
 ```{r}
 #' Factor: NA is "Missing" level
 #'
-#' Assign the value "Missing" to missing values of a factor. Build as [addNA()].
+#' Assign the value "Missing" to missing values of a factor. Built as [addNA()].
 #'
 #' @param x (`factor`)
 #' @param missing_lvl (`character`)
@@ -220,63 +218,72 @@ add_missing <- function(x, missing_lvl = "Missing") {
 
 ## 2.2. Practically
 
-- Not a drastic change:
-    + keep working with `script.R`
-    + once a function is identified, write in `R/`.
+Transfering a script in a package is not a drastic change:
+
+- keep working with `script.R`
+- once a function is identified, write in `R/`.
 
 Frequently asked qestions:
 
-- "_Many files, will not this be complicated to find a file in the future?"_
-    + <F2>: Go to function definition.
+- "_Many files, will not this be complicated to find a file/function in the
+   project?"_
+    + `<F2>`: Go to function definition.
 
 - "_Many files, should every file be sourced with `source()`_":
     + `devtools::load_all()`: load all the package, all the function becomes
-    available similarly to a `library()` call for an installed package.
+    available similarly to a `library()` call for an installed package
+    (even the manual pages).
 
 - "_Many files, how a programmer/reviewer knows where to start?_"
     + `usethis::use_readme_rmd()`, use `knitr::read_chunk(inst/study.R)` to
-    screen the script sections, and use empty named r code chunk to
-    decide which section to execute in which order.
+    screen the script sections, and use empty but named R code chunk to
+    decide which section to execute, in which order.
     + Good because:
         - there are sections needed for development only, but not for the
-        program run (e.g. preview) while code-commenting is bad practice.
-        - run the program is simple as clicking on the knit button.
+        program run (e.g. preview) while commented code is bad practice.
         - room for contextual information (e.g. a decision made because
         of an unexpected finding).
+        - alternative for the Don't Repeat Yourself principle:
+        a code chunk can be called several times.
+        For instance, as ggplot is a framework enhancing the readability
+        of the involved graphical layers, it is sometimes a shame to wrap a
+        ggplot code section into a function, better to repeat its execution.
+        
 
 # 3 Perspectives:
 
 Standard format comes with standard-support tools:
 
-- `devtools`:
-    + `<ctrl>+<shift>+<d>`, equivalent to `devtools::document()`
-    updates the function documentation
-    (populates the `NAMESPACE` file and `man/` folder).
-    + `<ctrl>+<shift>+<e>`, equivalent to `devtools::check()` very a large
-    number of standards (e.g. functions are well documented, dependencies are
-    well accounted for, examples are working).
+- **R Markdown/README/RStudio**:
+  the program run is as simple as clicking on the knit button.
+- **devtools**:
+    + `<ctrl>+<shift>+<d>`, equivalent to `devtools::document()`,
+    updates the documentation (populates the `NAMESPACE` file and `man/`
+    folder).
+    + `<ctrl>+<shift>+<e>`, equivalent to `devtools::check()`,
+    verifies a large number of standards (e.g. functions are well documented,
+    dependencies are well accounted for, examples are working).
 
-![Devtools: look at the build panel](img/rig_06.png){ width=50% }
+![Devtools: look at the _Build_ panel](img/rig_06.png){ width=50% }
 
-- `lintr`:
+- `lintr::lint()`:
     + helps checking the code is lint-free, clean. Helps in the adoption of
     good practices and standard.
 
-![Lintr: keep-up with code quality](img/rig_07.png){ width=50% }
-
+![Lintr: keep-up with code quality (and proove it)](img/rig_07.png){ width=50% }
 
 - `pkgdown`:
-    + build an website: the result `README.md` becomes the home page, functions
+    + build a website: the result `README.md` becomes the home page, functions
     are documented in `reference`, vignette added in `articles`.
-    + All functions are cross-referenced: the link `adam_ww()`, will bring you
+    + all functions are cross-referenced: the link `adam_ww()`, will bring you
     to the right page.
 
 
 And much more:
 
 - **data**: contains datasets, possibly along with the preprocessing code.
-- templates: complexe templates ins `inst/rmarkdown`.
-- `vignettes/`: a place to explain a framework (e.g. the present document).
+- **templates**: complexe templates ins `inst/rmarkdown/`.
+- `vignettes/`: use (e.g. the present document).
 - `tests/`: place for automated test (e.g. test that the ADSL data
   returned by `adam_ww` is such as `USUBJID` is the unique row identifier).
 - Git integration.

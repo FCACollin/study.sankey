@@ -11,13 +11,9 @@ library(magrittr)
 test_dta <- adam_ww(50)
 attach(test_dta, warn.conflicts = FALSE)
 
-adsl %>%
-  head() %>%
-  knitr::kable(caption = "Dummy ADSL dataset")
+knitr::kable(head(adsl), caption = "Dummy ADSL dataset")
+knitr::kable(head(adpasi), caption = "Dummy ADPASI dataset")
 
-adpasi %>%
-  head() %>%
-  knitr::kable(caption = "Dummy ADPASI dataset")
 
 ## ---- analysis_dataset ----
 
@@ -32,15 +28,20 @@ ads <- adpasi %>%
   select(subj, time, rsp) %>%
   arrange(rsp, time, subj)
 
-ads %>%
-  head() %>%
-  knitr::kable(caption = 'Outlook of the analysis dataset data') # lintr demo
+knitr::kable(
+  x = head(ads),
+  # lintr demo: only use double-quotes
+  caption = 'Outlook of the analysis dataset data'
+)
 
 
 ## ---- graphic ----
 
-# test <- viridis::viridis(5) # lintr demonstration
-color_scale <- colorScale <-  viridis::viridis(# lintr demonstration
+# lintr demonstration: commented code should be removed
+# test <- viridis::viridis(5)
+
+# lintr demonstration: keep using snake_case for variable and functions names
+colorScale <- color_scale <-  viridis::viridis(
   nlevels(ads$rsp),
   begin = .2, end = .8, option = "C",
   direction = -1
@@ -50,11 +51,7 @@ names(color_scale) <- levels(ads$rsp)
 gg_sankey <- ads %>%
   ggplot(aes(x = time, stratum = rsp, alluvium = subj, fill = rsp)) +
   geom_stratum(colour = NA) +
-  geom_flow(
-    stat = "alluvium",
-    color = "gray85",
-    lwd = .01
-  ) +
+  geom_flow(stat = "alluvium", color = "gray85", lwd = .01) +
   ggtitle("Alluvial plot: Response category by visit") +
   scale_fill_manual(values = color_scale) +
   theme_diane()
@@ -63,7 +60,7 @@ gg_sankey <- ads %>%
 ## ---- annotation ----
 
 gg_sankey <- clean_slate(margin = unit(c(1, 1, 1, 1), "cm")) %>%
-  add_header("Topic", c("Not Yet Confidential", "Draft")) %>%
+  add_header(left = "Topic", right = c("Not Yet Confidential", "Draft")) %>%
   add_title(c(
     "Figure 1 - Prototype of Alluvial plot",
     "Analysis set: 50 random subjects"
@@ -78,6 +75,6 @@ gg_sankey <- clean_slate(margin = unit(c(1, 1, 1, 1), "cm")) %>%
 message("For the need of the example, the page size is .66 A4 ")
 file <- paste0(tempfile(), ".pdf")
 pdf(file, width = 11.7 * .66, height = 8.3 * .66)
-gg_sankey %>% grid.draw()
+grid.draw(gg_sankey)
 dev.off()
 preview(file)

@@ -1,3 +1,13 @@
+navbar:
+  structure:
+    right: [github, about]
+  components:
+    github:
+        icon: fa-github
+        href: https://github.com/FCACollin/study.sankey
+    about:
+        icon: fa-portrait
+        href: https://fcacollin.github.io/Latarnia/portfolio/
 template:
   params:
     bootswatch: yeti
